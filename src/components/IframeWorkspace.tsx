@@ -81,8 +81,8 @@ export default function IframeWorkspace() {
       try {
         // Create a "Seeding URL" with credentials for modern SPAs to catch
         const seedingUrl = new URL(src);
-        seedingUrl.searchParams.set("seed_email", credentials.email);
-        seedingUrl.searchParams.set("seed_pass", credentials.pass);
+        seedingUrl.searchParams.set("email", credentials.email);
+        seedingUrl.searchParams.set("pass", credentials.pass);
 
         console.log(`[Portal] Direct seeding navigation to: ${seedingUrl.toString()}`);
         return seedingUrl.toString();
