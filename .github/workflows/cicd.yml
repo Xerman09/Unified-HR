@@ -17,13 +17,11 @@ jobs:
       - name: Deploy Unified-HR
         run: |
           APP_PATH="/home/vertex-server-2/system/general_sys/Unified-HR"
-          
-          # Make sure this matches the name you use when you start it in PM2
-          PM2_NAME="unified-hr-system" 
+          PM2_NAME="unified-hr"
           
           echo "Starting deployment to $APP_PATH"
           
-          # Sync files but EXCLUDE package.json and all environment files
+          # 1. Sync files (protecting package.json, .env, and node_modules)
           rsync -a --delete \
             --exclude='node_modules' \
             --exclude='.next' \
@@ -33,12 +31,16 @@ jobs:
             --exclude='.env.local' \
             ./ "$APP_PATH/"
             
+          # 2. Enter the project folder
           cd "$APP_PATH"
           
-          # Build using the server's existing package.json
+          # 3. Build the Next.js application
           npm run build
           
-          # Restart the PM2 process
-          pm2 restart "$PM2_NAME" || echo "Warning: PM2 process '$PM2_NAME' not found."
+          # 4. Restart PM2. If it's not running yet, start it automatically!
+          pm2 restart "$PM2_NAME" || pm2 start npm --name "$PM2_NAME" -- run start
           
-          echo "Unified-HR deployment complete!"
+          # Save the PM2 list so it survives server reboots
+          pm2 save
+          
+          echo "Unified-HR deployment and PM2 restart complete!"
