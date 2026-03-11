@@ -61,46 +61,7 @@ export default function IframeWorkspace() {
     return requested;
   }, [requested, useFallback, appMeta]);
 
-  // Determine if we should attempt auto-login
-  const isPayroll = Boolean(appMeta && isPayrollApp(appMeta));
-  const credentials = useMemo(() => {
-    if (typeof window === "undefined") return null;
-    const email = sessionStorage.getItem("unified_hr_user");
-    const pass = sessionStorage.getItem("unified_hr_pass");
-    return email && pass ? { email, pass } : null;
-  }, [requested]);
-
-  const shouldAutoLogin = isPayroll && credentials && hasAutoLoggedIn !== src;
-
-  // Final iframe source logic:
-  const iframeSrc = useMemo(() => {
-    // If we're on the server or not mounted, we can't seed yet
-    if (!isMounted) return isPayroll ? "about:blank" : src;
-
-    if (isPayroll && credentials) {
-      try {
-        // Create a "Seeding URL" with credentials for modern SPAs to catch
-        const seedingUrl = new URL(src);
-        seedingUrl.searchParams.set("email", credentials.email);
-        seedingUrl.searchParams.set("pass", credentials.pass);
-
-        console.log(`[Portal] Direct seeding navigation to: ${seedingUrl.toString()}`);
-        return seedingUrl.toString();
-      } catch (e) {
-        return src;
-      }
-    }
-
-    return src;
-  }, [isMounted, isPayroll, credentials, src]);
-
-  useEffect(() => {
-    if (shouldAutoLogin && isMounted) {
-      console.log(`[Portal] Initiating secure login for ${appMeta?.label}...`);
-      // No need to set timer here if we're using direct URL seeding, 
-      // but we'll use hasAutoLoggedIn to control the overlay
-    }
-  }, [shouldAutoLogin, isMounted, appMeta]);
+  const iframeSrc = src;
 
   if (!isMounted) {
     return (
@@ -143,25 +104,6 @@ export default function IframeWorkspace() {
       )}
 
       <div className="flex-1 relative">
-        {isMounted && isPayroll && credentials && !hasAutoLoggedIn && (
-          <div className="absolute inset-0 z-50 flex items-center justify-center bg-slate-950/95 backdrop-blur-xl pointer-events-none">
-            <div className="flex flex-col items-center gap-6">
-              <div className="relative">
-                <div className="h-20 w-20 border-4 border-cyan-500/10 border-t-cyan-500 rounded-full animate-spin" />
-                <div className="absolute inset-0 border-4 border-transparent border-b-purple-500 rounded-full animate-[spin_2s_linear_infinite]" />
-              </div>
-              <div className="flex flex-col items-center gap-3">
-                <div className="text-white font-black text-xs uppercase tracking-[0.4em] animate-pulse">
-                  Seeding Payroll Session
-                </div>
-                <div className="text-zinc-500 text-[9px] uppercase tracking-widest font-black opacity-50">
-                  Broadcasting Authorized Credentials...
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-
         <iframe
           name="portal-app-frame"
           key={iframeSrc}
@@ -169,12 +111,6 @@ export default function IframeWorkspace() {
           className="absolute inset-0 w-full h-full border-none"
           allow="clipboard-read; clipboard-write; fullscreen"
           referrerPolicy="no-referrer"
-          onLoad={() => {
-            if (isPayroll) {
-              // Hide overlay after iframe loads
-              setTimeout(() => setHasAutoLoggedIn(src), 1500);
-            }
-          }}
         />
       </div>
     </div>
