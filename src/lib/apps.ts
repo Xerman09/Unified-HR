@@ -25,7 +25,7 @@ export const APP_GROUPS: AppGroup[] = [
     items: [
       { id: "vertex-attendance", label: "Attendance Report", url: "http://192.168.0.253:12003", fallbackUrl: "http://vtc:12003" },
       { id: "vertex-users", label: "User Management", url: "http://192.168.0.253:12001/userlist.html", fallbackUrl: "http://vtc:12001/userlist.html" },
-      { id: "vertex-payroll", label: "Payroll System", url: "http://192.168.0.253:12004", fallbackUrl: "http://vtc:12004" },
+      { id: "vertex-payroll", label: "Payroll System", url: "http://192.168.0.253:12004/auth/login", fallbackUrl: "http://vtc:12004/auth/login", isPayroll: true },
     ],
   },
   {
@@ -33,7 +33,7 @@ export const APP_GROUPS: AppGroup[] = [
     items: [
       { id: "hanvin-attendance", label: "Attendance Report", url: "http://192.168.0.253:13003", fallbackUrl: "http://vtc:13003" },
       { id: "hanvin-users", label: "User Management", url: "http://192.168.0.253:13001/userlist.html", fallbackUrl: "http://vtc:13001/userlist.html" },
-      { id: "hanvin-payroll", label: "Payroll System", url: "http://192.168.0.253:13004", fallbackUrl: "http://vtc:13004" },
+      { id: "hanvin-payroll", label: "Payroll System", url: "http://192.168.0.253:13004/auth/login", fallbackUrl: "http://vtc:13004/auth/login", isPayroll: true },
     ],
   },
   {
@@ -49,7 +49,7 @@ export const APP_GROUPS: AppGroup[] = [
     items: [
       { id: "cafeteria-attendance", label: "Attendance Report", url: "http://192.168.0.253:15003", fallbackUrl: "http://vtc:15003" },
       { id: "cafeteria-users", label: "User Management", url: "http://192.168.0.253:15001/userlist.html", fallbackUrl: "http://vtc:15001/userlist.html" },
-      { id: "cafeteria-payroll", label: "Payroll System", url: "http://192.168.0.253:15004", fallbackUrl: "http://vtc:15004" },
+      { id: "cafeteria-payroll", label: "Payroll System", url: "http://192.168.0.253:15004/auth/login", fallbackUrl: "http://vtc:15004/auth/login", isPayroll: true },
     ],
   },
   {
@@ -57,7 +57,7 @@ export const APP_GROUPS: AppGroup[] = [
     items: [
       { id: "rc2-attendance", label: "Attendance Report", url: "http://192.168.0.253:16003", fallbackUrl: "http://vtc:16003" },
       { id: "rc2-users", label: "User Management", url: "http://192.168.0.253:16001/userlist.html", fallbackUrl: "http://vtc:16001/userlist.html" },
-      { id: "rc2-payroll", label: "Payroll System", url: "http://192.168.0.253:16004", fallbackUrl: "http://vtc:16004" },
+      { id: "rc2-payroll", label: "Payroll System", url: "http://192.168.0.253:16004/auth/login", fallbackUrl: "http://vtc:16004/auth/login", isPayroll: true },
     ],
   },
   {
@@ -65,7 +65,7 @@ export const APP_GROUPS: AppGroup[] = [
     items: [
       { id: "manufacturing-attendance", label: "Attendance Report", url: "http://192.168.0.253:17003", fallbackUrl: "http://vtc:17003" },
       { id: "manufacturing-users", label: "User Management", url: "http://192.168.0.253:17001/userlist.html", fallbackUrl: "http://vtc:17001/userlist.html" },
-      { id: "manufacturing-payroll", label: "Payroll System", url: "http://192.168.0.253:17004", fallbackUrl: "http://vtc:17004" },
+      { id: "manufacturing-payroll", label: "Payroll System", url: "http://192.168.0.253:17004/auth/login", fallbackUrl: "http://vtc:17004/auth/login", isPayroll: true },
     ],
   },
   {
@@ -73,7 +73,7 @@ export const APP_GROUPS: AppGroup[] = [
     items: [
       { id: "vital-attendance", label: "Attendance Report", url: "http://192.168.0.253:18003", fallbackUrl: "http://vtc:18003" },
       { id: "vital-users", label: "User Management", url: "http://192.168.0.253:18001/userlist.html", fallbackUrl: "http://vtc:18001/userlist.html" },
-      { id: "vital-payroll", label: "Payroll System", url: "http://192.168.0.253:18004", fallbackUrl: "http://vtc:18004" },
+      { id: "vital-payroll", label: "Payroll System", url: "http://192.168.0.253:18004/auth/login", fallbackUrl: "http://vtc:18004/auth/login", isPayroll: true },
     ],
   },
 ];
