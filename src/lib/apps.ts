@@ -13,7 +13,7 @@ export type AppGroup = {
 
 export const APP_GROUPS: AppGroup[] = [
   {
-    group: "Men2 HR System",
+    group: "Men2 Dagupan",
     items: [
       { id: "men2-attendance", label: "Attendance Report", url: "http://192.168.0.253:11003", fallbackUrl: "http://vtc:11003" },
       { id: "men2-users", label: "User Management", url: "http://192.168.0.253:11001/userlist.html", fallbackUrl: "http://vtc:11001/userlist.html" },
@@ -21,7 +21,7 @@ export const APP_GROUPS: AppGroup[] = [
     ],
   },
   {
-    group: "Vertex HR System",
+    group: "Vertex",
     items: [
       { id: "vertex-attendance", label: "Attendance Report", url: "http://192.168.0.253:12003", fallbackUrl: "http://vtc:12003" },
       { id: "vertex-users", label: "User Management", url: "http://192.168.0.253:12001/userlist.html", fallbackUrl: "http://vtc:12001/userlist.html" },
@@ -29,7 +29,7 @@ export const APP_GROUPS: AppGroup[] = [
     ],
   },
   {
-    group: "HANVIN HR SYSTEM",
+    group: "HANVIN",
     items: [
       { id: "hanvin-attendance", label: "Attendance Report", url: "http://192.168.0.253:13003", fallbackUrl: "http://vtc:13003" },
       { id: "hanvin-users", label: "User Management", url: "http://192.168.0.253:13001/userlist.html", fallbackUrl: "http://vtc:13001/userlist.html" },
