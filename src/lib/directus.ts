@@ -16,7 +16,10 @@ export type DirectusItemsResponse<T> = {
 
 function mustEnv(name: string): string {
   const v = process.env[name];
-  if (!v) throw new Error(`Missing env var: ${name}`);
+  if (!v) {
+    console.warn(`[Directus Config Warning]: Missing environment variable: ${name}`);
+    return "";
+  }
   return v;
 }
 
@@ -45,6 +48,10 @@ export async function fetchUserByEmail(email: string): Promise<DirectusUser | nu
   });
 
   if (!res.ok) {
+    if (res.status === 401 || res.status === 403) {
+      console.warn(`Directus access denied: ${res.status}. Check your DIRECTUS_TOKEN.`);
+      return null;
+    }
     const text = await res.text().catch(() => "");
     throw new Error(`Directus error (${res.status}): ${text || res.statusText}`);
   }

@@ -18,7 +18,7 @@ export async function POST(req: NextRequest) {
     }
 
     if (isUserDeleted(user)) {
-      return NextResponse.json({ message: "Account is disabled" }, { status: 403 });
+      return NextResponse.json({ message: "Invalid credentials" }, { status: 401 });
     }
 
     // NOTE: This compares plaintext passwords because your Directus sample shows plaintext.
@@ -29,7 +29,7 @@ export async function POST(req: NextRequest) {
 
     const deptId = getDepartmentId(user);
     if (deptId !== 2) {
-      return NextResponse.json({ message: "Access denied: Department 2 only" }, { status: 403 });
+      return NextResponse.json({ message: "Access denied" }, { status: 403 });
     }
 
     const sessionToken = await signSession({
@@ -37,7 +37,6 @@ export async function POST(req: NextRequest) {
       email: user.user_email,
       name: buildName(user),
       departmentId: deptId,
-      isAdmin: (user as any).isAdmin ?? null,
     });
 
     const res = NextResponse.json({ ok: true });
@@ -53,8 +52,9 @@ export async function POST(req: NextRequest) {
 
     return res;
   } catch (err: any) {
+    console.error("[Login API Error]:", err);
     return NextResponse.json(
-      { message: err?.message || "Unexpected server error" },
+      { message: "An unexpected error occurred. Please try again later." },
       { status: 500 }
     );
   }

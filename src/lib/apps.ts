@@ -2,6 +2,8 @@ export type AppLink = {
   id: string;
   label: string;
   url: string;
+  fallbackUrl?: string;
+  isPayroll?: boolean;
 };
 
 export type AppGroup = {
@@ -13,28 +15,28 @@ export const APP_GROUPS: AppGroup[] = [
   {
     group: "Men2 HR System",
     items: [
-      { id: "men2-attendance", label: "Attendance Report", url: "http://192.168.0.143:7777" },
-      { id: "men2-users", label: "User Management", url: "http://192.168.0.143:3002/userlist.html" },
-      { id: "men2-payroll", label: "Payroll System", url: "http://192.168.0.143:9001" },
+      { id: "men2-attendance", label: "Attendance Report", url: "http://192.168.0.253:11003", fallbackUrl: "http://vtc:11003" },
+      { id: "men2-users", label: "User Management", url: "http://192.168.0.253:11001/userlist.html", fallbackUrl: "http://vtc:11001/userlist.html" },
+      { id: "men2-payroll", label: "Payroll System", url: "http://localhost:9001/auth/login", fallbackUrl: "http://goatedcodoer:9011/auth/login", isPayroll: true },
     ],
   },
   {
     group: "Vertex HR System",
     items: [
-      { id: "vertex-attendance", label: "Attendance Report", url: "http://192.168.0.143:9874" },
-      { id: "vertex-users", label: "User Management", url: "http://192.168.0.143:6001/userlist.html" },
-      { id: "vertex-payroll", label: "Payroll System", url: "http://192.168.0.143:9002" },
+      { id: "vertex-attendance", label: "Attendance Report", url: "http://192.168.0.253:12003", fallbackUrl: "http://vtc:12003" },
+      { id: "vertex-users", label: "User Management", url: "http://192.168.0.253:12001/userlist.html", fallbackUrl: "http://vtc:12001/userlist.html" },
+      { id: "vertex-payroll", label: "Payroll System", url: "http://192.168.0.253:12004", fallbackUrl: "http://vtc:12004" },
     ],
   },
   {
     group: "HANVIN HR SYSTEM",
     items: [
-      { id: "hanvin-attendance", label: "Attendance Report", url: "http://192.168.0.143:8888" },
-      { id: "hanvin-users", label: "User Management", url: "http://192.168.0.143:3003/userlist.html" },
-      { id: "hanvin-payroll", label: "Payroll System", url: "http://192.168.0.143:9003" },
+      { id: "hanvin-attendance", label: "Attendance Report", url: "http://192.168.0.253:13003", fallbackUrl: "http://vtc:13003" },
+      { id: "hanvin-users", label: "User Management", url: "http://192.168.0.253:13001/userlist.html", fallbackUrl: "http://vtc:13001/userlist.html" },
+      { id: "hanvin-payroll", label: "Payroll System", url: "http://192.168.0.253:13004", fallbackUrl: "http://vtc:13004" },
     ],
   },
-    {
+  {
     group: "MEN2 MANILA",
     items: [
       { id: "men2-manila-attendance", label: "Attendance Report", url: "http://100.103.111.11:10002" },
@@ -42,12 +44,56 @@ export const APP_GROUPS: AppGroup[] = [
       { id: "men2-manila-payroll", label: "Payroll System", url: "http://192.168.0.143:9003" },
     ],
   },
+  {
+    group: "CAFETERIA",
+    items: [
+      { id: "cafeteria-attendance", label: "Attendance Report", url: "http://192.168.0.253:15003", fallbackUrl: "http://vtc:15003" },
+      { id: "cafeteria-users", label: "User Management", url: "http://192.168.0.253:15001/userlist.html", fallbackUrl: "http://vtc:15001/userlist.html" },
+      { id: "cafeteria-payroll", label: "Payroll System", url: "http://192.168.0.253:15004", fallbackUrl: "http://vtc:15004" },
+    ],
+  },
+  {
+    group: "RC2",
+    items: [
+      { id: "rc2-attendance", label: "Attendance Report", url: "http://192.168.0.253:16003", fallbackUrl: "http://vtc:16003" },
+      { id: "rc2-users", label: "User Management", url: "http://192.168.0.253:16001/userlist.html", fallbackUrl: "http://vtc:16001/userlist.html" },
+      { id: "rc2-payroll", label: "Payroll System", url: "http://192.168.0.253:16004", fallbackUrl: "http://vtc:16004" },
+    ],
+  },
+  {
+    group: "Men2 Manufacturing",
+    items: [
+      { id: "manufacturing-attendance", label: "Attendance Report", url: "http://192.168.0.253:17003", fallbackUrl: "http://vtc:17003" },
+      { id: "manufacturing-users", label: "User Management", url: "http://192.168.0.253:17001/userlist.html", fallbackUrl: "http://vtc:17001/userlist.html" },
+      { id: "manufacturing-payroll", label: "Payroll System", url: "http://192.168.0.253:17004", fallbackUrl: "http://vtc:17004" },
+    ],
+  },
+  {
+    group: "Vital",
+    items: [
+      { id: "vital-attendance", label: "Attendance Report", url: "http://192.168.0.253:18003", fallbackUrl: "http://vtc:18003" },
+      { id: "vital-users", label: "User Management", url: "http://192.168.0.253:18001/userlist.html", fallbackUrl: "http://vtc:18001/userlist.html" },
+      { id: "vital-payroll", label: "Payroll System", url: "http://192.168.0.253:18004", fallbackUrl: "http://vtc:18004" },
+    ],
+  },
 ];
+
+export function isPayrollApp(app: AppMeta | AppLink | null | undefined): boolean {
+  if (!app) return false;
+  if ("isPayroll" in app && app.isPayroll) return true;
+  return app.id.endsWith("-payroll");
+}
 
 export type AppMeta = AppLink & { group: string };
 
 export const APP_INDEX: Record<string, AppMeta> = Object.fromEntries(
-  APP_GROUPS.flatMap((g) => g.items.map((i) => [i.url, { ...i, group: g.group }]))
+  APP_GROUPS.flatMap((g) => g.items.flatMap((i) => {
+    const entries = [[i.url, { ...i, group: g.group }]];
+    if (i.fallbackUrl) {
+      entries.push([i.fallbackUrl, { ...i, group: g.group }]);
+    }
+    return entries;
+  }))
 );
 
 export const ALLOWED_URLS = new Set(Object.keys(APP_INDEX));

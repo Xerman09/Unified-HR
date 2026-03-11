@@ -33,8 +33,8 @@ export default function Sidebar() {
             <LogoMark />
           </div>
           <div className="min-w-0">
-            <div className="text-sm font-semibold leading-tight">HR Portal</div>
-            <div className="text-xs text-zinc-400 leading-tight">Internal apps dashboard</div>
+            <div className="text-base font-bold leading-tight tracking-tight text-white group-hover:text-emerald-400 transition-colors">HR PORTAL</div>
+            <div className="text-[10px] text-zinc-500 leading-tight uppercase tracking-[0.2em] font-medium">Enterprise Hub</div>
           </div>
         </div>
 
@@ -43,8 +43,8 @@ export default function Sidebar() {
           <input
             value={q}
             onChange={(e) => setQ(e.target.value)}
-            placeholder="Search apps…"
-            className="w-full rounded-2xl bg-zinc-900/60 border border-zinc-800 px-10 py-2 text-sm outline-none placeholder:text-zinc-500 focus:ring-2 focus:ring-zinc-600"
+            placeholder="Quick search..."
+            className="w-full rounded-xl bg-zinc-900/40 border border-zinc-800/50 px-10 py-2.5 text-xs outline-none placeholder:text-zinc-600 focus:ring-1 focus:ring-zinc-700 focus:border-zinc-700 transition-all input-premium"
           />
         </div>
       </div>
@@ -60,7 +60,7 @@ export default function Sidebar() {
                   </div>
                   <div className="text-zinc-500 group-open:rotate-180 transition-transform">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                      <path d="m6 9 6 6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="m6 9 6 6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                   </div>
                 </div>
@@ -74,10 +74,10 @@ export default function Sidebar() {
                       key={item.id}
                       href={`${pathname}?src=${encodeURIComponent(item.url)}`}
                       className={[
-                        "flex items-center justify-between gap-2 rounded-2xl px-3 py-2 text-sm border transition-colors",
+                        "group/item flex items-center justify-between gap-2 rounded-xl px-4 py-2.5 text-[13px] border transition-all duration-300",
                         isActive
-                          ? "bg-white text-zinc-950 border-white"
-                          : "bg-transparent text-zinc-200 border-zinc-900/60 hover:bg-zinc-900/60 hover:border-zinc-800",
+                          ? "bg-white text-zinc-950 border-white shadow-lg shadow-white/5 font-bold"
+                          : "bg-transparent text-zinc-400 border-transparent hover:bg-zinc-900/40 hover:text-zinc-200 hover:border-zinc-800/50",
                       ].join(" ")}
                     >
                       <span className="truncate">{item.label}</span>

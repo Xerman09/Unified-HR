@@ -14,7 +14,8 @@ export default function TopNav({ user }: { user: SessionUser }) {
   const app = useMemo(() => getAppMetaByUrl(requested), [requested]);
 
   async function logout() {
-    await fetch("/api/auth/logout", { method: "POST" }).catch(() => {});
+    sessionStorage.clear();
+    await fetch("/api/auth/logout", { method: "POST" }).catch(() => { });
     router.replace("/login");
     router.refresh();
   }
@@ -25,17 +26,21 @@ export default function TopNav({ user }: { user: SessionUser }) {
   }
 
   return (
-    <header className="h-16 shrink-0 bg-white border-b border-zinc-200 px-5 flex items-center justify-between">
+    <header className="h-20 shrink-0 glass border-b border-zinc-200/50 px-8 flex items-center justify-between sticky top-0 z-50">
       <div className="min-w-0">
         <div className="flex items-center gap-3 min-w-0">
-          <div className="text-sm font-semibold text-zinc-900 truncate">
-            {app ? app.label : "Dashboard"}
+          <div className="text-base font-bold text-zinc-900 tracking-tight">
+            {app ? app.label : "Portal Home"}
           </div>
           {app ? (
             <span className="hidden sm:inline-flex items-center rounded-full bg-zinc-100 px-2.5 py-1 text-xs text-zinc-600 border border-zinc-200">
               {app.group}
             </span>
-          ) : null}
+          ) : (
+            <span className="hidden sm:inline-flex items-center rounded-full bg-emerald-50 px-2.5 py-1 text-[10px] font-bold text-emerald-700 border border-emerald-100 uppercase tracking-wider">
+              System Ready
+            </span>
+          )}
         </div>
         <div className="text-xs text-zinc-500 mt-0.5 truncate">
           {user.name} • {user.email}
@@ -45,7 +50,7 @@ export default function TopNav({ user }: { user: SessionUser }) {
       <div className="flex items-center gap-2">
         <button
           onClick={openNewTab}
-          className="inline-flex items-center gap-2 rounded-xl border border-zinc-300 bg-white px-3 py-2 text-sm hover:bg-zinc-50"
+          className="inline-flex items-center gap-2 rounded-xl border border-zinc-200 bg-white px-4 py-2.5 text-sm font-medium btn-premium hover:bg-zinc-50"
           title="Open current app in a new tab"
         >
           <ExternalLink className="text-zinc-700" />
@@ -54,7 +59,7 @@ export default function TopNav({ user }: { user: SessionUser }) {
 
         <button
           onClick={logout}
-          className="rounded-xl bg-zinc-900 text-white px-3.5 py-2 text-sm font-medium hover:bg-zinc-800"
+          className="rounded-xl bg-zinc-950 text-white px-5 py-2.5 text-sm font-bold shadow-lg shadow-zinc-200 btn-premium"
         >
           Logout
         </button>
