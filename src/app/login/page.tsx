@@ -4,7 +4,6 @@ import { useMemo, useState, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { LogoMark } from "@/components/icons";
 import DynamicBackground from "@/components/DynamicBackground";
-import LoginCarousel from "@/components/LoginCarousel";
 
 type LoginState = "idle" | "loading" | "error";
 
@@ -56,7 +55,6 @@ function LoginForm() {
       {/* Dynamic Left Panel */}
       <div className="hidden lg:flex flex-col justify-between p-12 relative overflow-hidden bg-zinc-950">
         <DynamicBackground />
-        <LoginCarousel />
 
         <div className="flex items-center gap-3 relative z-20 transition-transform hover:scale-105 duration-300 w-fit cursor-default">
           <div className="h-10 w-10 rounded-2xl bg-white grid place-items-center shadow-2xl">
