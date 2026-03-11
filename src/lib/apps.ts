@@ -17,7 +17,7 @@ export const APP_GROUPS: AppGroup[] = [
     items: [
       { id: "men2-attendance", label: "Attendance Report", url: "http://192.168.0.253:11003", fallbackUrl: "http://vtc:11003" },
       { id: "men2-users", label: "User Management", url: "http://192.168.0.253:11001/userlist.html", fallbackUrl: "http://vtc:11001/userlist.html" },
-      { id: "men2-payroll", label: "Payroll System", url: "http://localhost:9001/auth/login", fallbackUrl: "http://goatedcodoer:9011/auth/login", isPayroll: true },
+      { id: "men2-payroll", label: "Payroll System", url: "http://192.168.0.253:9001/auth/login", fallbackUrl: "http://goatedcodoer:9011/auth/login", isPayroll: true },
     ],
   },
   {
