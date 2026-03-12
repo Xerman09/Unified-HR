@@ -37,7 +37,7 @@ export const APP_GROUPS: AppGroup[] = [
     ],
   },
   {
-    group: "MEN2 MANILA",
+    group: "MEN2 MANILA Dagupan",
     items: [
       { id: "men2-manila-attendance", label: "Attendance Report", url: "http://100.103.111.11:10002" },
       { id: "men2-manila-users", label: "User Management", url: "http://100.103.111.11:10001/userlist.html" },
