@@ -17,7 +17,7 @@ export const APP_GROUPS: AppGroup[] = [
     items: [
       { id: "men2-attendance", label: "Attendance Report", url: "http://192.168.0.253:11003", fallbackUrl: "http://vtc:11003" },
       { id: "men2-users", label: "User Management", url: "http://192.168.0.253:11001/userlist.html", fallbackUrl: "http://vtc:11001/userlist.html" },
-      { id: "men2-payroll", label: "Payroll System", url: "http://192.168.0.253:9001/auth/login", fallbackUrl: "http://goatedcodoer:9011/auth/login", isPayroll: true },
+      { id: "men2-payroll", label: "Payroll System", url: "http://192.168.0.253:9011/auth/login", fallbackUrl: "http://goatedcodoer:9011/auth/login", isPayroll: true },
     ],
   },
   {
@@ -25,7 +25,7 @@ export const APP_GROUPS: AppGroup[] = [
     items: [
       { id: "vertex-attendance", label: "Attendance Report", url: "http://192.168.0.253:12003", fallbackUrl: "http://vtc:12003" },
       { id: "vertex-users", label: "User Management", url: "http://192.168.0.253:12001/userlist.html", fallbackUrl: "http://vtc:12001/userlist.html" },
-      { id: "vertex-payroll", label: "Payroll System", url: "http://192.168.0.253:12004/auth/login", fallbackUrl: "http://vtc:12004/auth/login", isPayroll: true },
+      { id: "vertex-payroll", label: "Payroll System", url: "http://192.168.0.253:9012/auth/login", fallbackUrl: "http://vtc:9012/auth/login", isPayroll: true },
     ],
   },
   {
@@ -33,7 +33,7 @@ export const APP_GROUPS: AppGroup[] = [
     items: [
       { id: "hanvin-attendance", label: "Attendance Report", url: "http://192.168.0.253:13003", fallbackUrl: "http://vtc:13003" },
       { id: "hanvin-users", label: "User Management", url: "http://192.168.0.253:13001/userlist.html", fallbackUrl: "http://vtc:13001/userlist.html" },
-      { id: "hanvin-payroll", label: "Payroll System", url: "http://192.168.0.253:13004/auth/login", fallbackUrl: "http://vtc:13004/auth/login", isPayroll: true },
+      { id: "hanvin-payroll", label: "Payroll System", url: "http://192.168.0.253:9013/auth/login", fallbackUrl: "http://vtc:9013/auth/login", isPayroll: true },
     ],
   },
   {
