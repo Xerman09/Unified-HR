@@ -40,7 +40,7 @@ export const APP_GROUPS: AppGroup[] = [
     group: "MEN2 MANILA Dagupan",
     items: [
       { id: "men2-manila-attendance", label: "Attendance Report", url: "http://100.103.111.11:10002" },
-      { id: "men2-manila-users", label: "User Management", url: "http://100.103.111.11:10001/userlist.html" },
+      { id: "men2-manila-users", label: "User Management", url: "http://192.168.0.253:14001/userlist.html", fallbackUrl: "http://vtc:14001/userlist.html" },
       { id: "men2-manila-payroll", label: "Payroll System", url: "http://192.168.0.143:9003" },
     ],
   },

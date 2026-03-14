@@ -16,17 +16,17 @@ jobs:
 
       - name: Deploy Unified-HR
         run: |
+          set -e
           APP_PATH="/home/vertex-server-2/system/general_sys/Unified-HR"
           PM2_NAME="unified-hr"
           
           echo "Starting deployment to $APP_PATH"
           
-          # 1. Sync files (protecting package.json, .env, and node_modules)
+          # 1. Sync files (protecting .env and node_modules, but allowing package.json)
           rsync -a --delete \
             --exclude='node_modules' \
             --exclude='.next' \
             --exclude='.git' \
-            --exclude='package.json' \
             --exclude='.env' \
             --exclude='.env.local' \
             ./ "$APP_PATH/"
@@ -34,10 +34,14 @@ jobs:
           # 2. Enter the project folder
           cd "$APP_PATH"
           
-          # 3. Build the Next.js application
+          # 3. Ensure dependencies are up-to-date and clean the cache
+          npm install
+          npm run clean
+          
+          # 4. Build the Next.js application
           npm run build
           
-          # 4. Restart PM2. If it's not running yet, start it automatically!
+          # 5. Restart PM2. 
           pm2 restart "$PM2_NAME" || pm2 start npm --name "$PM2_NAME" -- run start
           
           # Save the PM2 list so it survives server reboots
