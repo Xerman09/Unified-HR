@@ -33,6 +33,7 @@ export const APP_GROUPS: AppGroup[] = [
     items: [
       { id: "hanvin-attendance", label: "Attendance Report", url: "http://192.168.0.253:13003", fallbackUrl: "http://vtc:13003" },
       { id: "hanvin-users", label: "User Management", url: "http://192.168.0.253:13001/userlist.html", fallbackUrl: "http://vtc:13001/userlist.html" },
+      { id: "hanvin-payroll", label: "Payroll System", url: "http://192.168.0.253:13004/auth/login", fallbackUrl: "http://vtc:13004/auth/login", isPayroll: true },
     ],
   },
   {
