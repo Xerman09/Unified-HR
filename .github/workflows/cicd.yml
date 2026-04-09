@@ -1,15 +1,51 @@
-name: Next.js CI/CD (Unified-HR)
+name: Unified-HR CI/CD
 
 on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
   workflow_dispatch:
 
 jobs:
-  build_and_deploy:
-    runs-on: self-hosted
+  quality_check:
+    name: Quality & Testing
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Security Audit
+        run: npm audit --audit-level=high || echo "Audit found issues, please review."
+
+      - name: Linting
+        run: npm run lint
+
+      - name: Type Check
+        run: npm run type-check
+
+      - name: Unit Tests
+        run: npm run test
+
+      - name: Production Build Verification
+        run: npm run build
+
+  deploy:
+    name: Deploy to Server
+    needs: quality_check
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: self-hosted
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -34,17 +70,17 @@ jobs:
           # 2. Enter the project folder
           cd "$APP_PATH"
           
-          # 3. Ensure dependencies are up-to-date and clean the cache
+          # 3. Ensure dependencies are up-to-date
           npm install
           npm run clean
           
-          # 4. Build the Next.js application
+          # 4. Build the application on the server
           npm run build
           
-          # 5. Restart PM2. 
+          # 5. Restart PM2
           pm2 restart "$PM2_NAME" || pm2 start npm --name "$PM2_NAME" -- run start
           
-          # Save the PM2 list so it survives server reboots
+          # Save the PM2 list
           pm2 save
           
           echo "Unified-HR deployment and PM2 restart complete!"
