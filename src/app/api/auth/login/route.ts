@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { fetchUserByEmail, getDepartmentId, isUserDeleted } from "@/lib/directus";
 import { buildName, signSession } from "@/lib/auth";
+import bcrypt from "bcryptjs";
 
 export async function POST(req: NextRequest) {
   try {
@@ -21,9 +22,15 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ message: "Invalid credentials" }, { status: 401 });
     }
 
-    // NOTE: This compares plaintext passwords because your Directus sample shows plaintext.
-    // For production, store hashed passwords and verify securely.
-    if (user.user_password !== password) {
+    let isValidPassword = false;
+    if (user.hash_password) {
+      isValidPassword = await bcrypt.compare(password, user.hash_password);
+    } else if (user.user_password) {
+      // Fallback for legacy plaintext passwords
+      isValidPassword = user.user_password === password;
+    }
+
+    if (!isValidPassword) {
       return NextResponse.json({ message: "Invalid credentials" }, { status: 401 });
     }
 

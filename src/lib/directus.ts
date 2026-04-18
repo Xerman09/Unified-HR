@@ -1,7 +1,8 @@
 export type DirectusUser = {
   user_id: number;
   user_email: string;
-  user_password: string;
+  user_password?: string;
+  hash_password?: string;
   user_fname?: string;
   user_mname?: string;
   user_lname?: string;
