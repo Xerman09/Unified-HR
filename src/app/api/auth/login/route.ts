@@ -39,13 +39,15 @@ export async function POST(req: NextRequest) {
       departmentId: deptId,
     });
 
+    const isHttps = req.nextUrl.protocol === "https:" || req.headers.get("x-forwarded-proto") === "https";
+
     const res = NextResponse.json({ ok: true });
     res.cookies.set({
       name: "hr_portal_session",
       value: sessionToken,
       httpOnly: true,
       sameSite: "lax",
-      secure: process.env.NODE_ENV === "production",
+      secure: process.env.NODE_ENV === "production" && isHttps,
       path: "/",
       maxAge: 60 * 60 * 12,
     });
