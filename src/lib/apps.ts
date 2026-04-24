@@ -13,6 +13,12 @@ export type AppGroup = {
 
 export const APP_GROUPS: AppGroup[] = [
   {
+    group: "UNIFIED PAYROLL",
+    items: [
+      { id: "unified-payroll", label: "Payroll System", url: "http://192.168.0.253:10002/portal", fallbackUrl: "http://vtc/portal", isPayroll: true },
+    ],
+  },
+  {
     group: "Men2 Dagupan",
     items: [
       { id: "men2-attendance", label: "Attendance Report", url: "http://192.168.0.253:11003", fallbackUrl: "http://vtc:11003" },

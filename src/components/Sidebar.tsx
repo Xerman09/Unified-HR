@@ -5,11 +5,13 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import { LogoMark, SearchIcon } from "@/components/icons";
+import { useSidebar } from "@/components/SidebarContext";
 
 export default function Sidebar() {
   const pathname = usePathname();
   const sp = useSearchParams();
   const current = sp.get("src");
+  const { collapsed } = useSidebar();
 
   const [q, setQ] = useState("");
 
@@ -26,8 +28,13 @@ export default function Sidebar() {
   }, [q]);
 
   return (
-    <aside className="w-80 shrink-0 h-full bg-zinc-950 text-zinc-100 border-r border-zinc-900/60">
-      <div className="px-5 pt-5 pb-4 border-b border-zinc-900/60">
+    <aside 
+      className={[
+        "shrink-0 h-full bg-zinc-950 text-zinc-100 border-r border-zinc-900/60 transition-all duration-300 ease-in-out overflow-hidden flex flex-col",
+        collapsed ? "w-0 border-transparent opacity-0" : "w-80 opacity-100"
+      ].join(" ")}
+    >
+      <div className="px-5 pt-5 pb-4 border-b border-zinc-900/60 min-w-[20rem]">
         <div className="flex items-center gap-3">
           <div className="h-10 w-10 rounded-2xl bg-white grid place-items-center">
             <LogoMark />
@@ -49,7 +56,7 @@ export default function Sidebar() {
         </div>
       </div>
 
-      <nav className="px-3 py-4 h-[calc(100%-120px)] overflow-y-auto">
+      <nav className="px-3 py-4 flex-1 overflow-y-auto min-w-[20rem]">
         <div className="space-y-4">
           {filtered.map((g) => (
             <details key={g.group} className="group" open>
