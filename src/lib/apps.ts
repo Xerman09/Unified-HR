@@ -15,7 +15,7 @@ export const APP_GROUPS: AppGroup[] = [
   {
     group: "UNIFIED PAYROLL",
     items: [
-      { id: "unified-payroll", label: "Payroll System", url: "http://192.168.0.253:10002/portal", fallbackUrl: "http://vtc/portal", isPayroll: true },
+      { id: "unified-payroll", label: "Payroll System", url: "http://192.168.0.253:10002/portal", fallbackUrl: "http://vtc:10002/portal", isPayroll: true },
     ],
   },
   {
