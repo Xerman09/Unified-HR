@@ -81,6 +81,20 @@ export const APP_GROUPS: AppGroup[] = [
       { id: "rsm-users", label: "User Management", url: "http://192.168.0.253:19001/userlist.html", fallbackUrl: "http://vtc:19001/userlist.html" },
       { id: "rsm-payroll", label: "Payroll System", url: "http://192.168.0.253:19004", fallbackUrl: "http://vtc:19004" },
     ]
+  },
+  {
+    group: "Ace Solar",
+    items: [
+      { id: "ace-solar-attendance", label: "Attendance Report", url: "http://192.168.0.253:21003", fallbackUrl: "http://vtc:21003" },
+      { id: "ace-solar-users", label: "User Management", url: "http://192.168.0.253:21001/userlist.html", fallbackUrl: "http://vtc:21001/userlist.html" },
+    ]
+  },
+  {
+    group: "Menza",
+    items: [
+      { id: "menza-attendance", label: "Attendance Report", url: "http://192.168.0.253:22003", fallbackUrl: "http://vtc:22003" },
+      { id: "menza-users", label: "User Management", url: "http://192.168.0.253:22001/userlist.html", fallbackUrl: "http://vtc:22001/userlist.html" },
+    ]
   }
 ];
 
